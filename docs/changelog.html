@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">        
+  <head>              
+    <title>                    
+      Spacemarc News - Changelog            
+    </title>              
+    <link rel="stylesheet" href="../style.css" type="text/css" />              
+  </head>        
+  <body class="text">
+<table width="80%" border="0" cellpadding="0" cellspacing="0" align="center">    
+
+	<tr>                                           
+            <td class="text" align="center" valign="top">                             
+              <img src="../images/logonews.gif" alt="logo" /><br /><br /><b>Cambiamenti nella versione 1.2.5</b></td> 
+          </tr> 
+<tr>
+<td>
+<ul>
+<li><font color="#FF0000">[Fix]</font> Corretta visualizzazione URL del sito di chi lascia un commento</li>
+<li><font color="#FF0000">[Fix]</font> Il nuovo utente creato ora riceve correttamente la propria password</li>
+<li><font color="#FF0000">[Fix]</font> Elenco delle news: corretta la query che gestisce l'ordinamento dei records</li>
+<li><font color="#FF0000">[Fix]</font> Gestione news: corretto ordinamento per categoria</li>
+<li><font color="#FF0000">[Fix]</font> Archivio delle news: corretta la query che gestisce l'ordinamento dei records</li>
+<li><font color="#FF0000">[Fix]</font> Corretto il ban per gli indirizzi IP che cominciano per una singola cifra</li>
+<li>[Change] Gestione news: unica colonna per letture / commenti / tags </li>
+<li>[Change] Commenti: colorazione in grigio per quelli non ancora approvati</li>
+<li>[Change] Versione stampabile: URL dell'articolo reso cliccabile</li>
+<li>[Change] Creazione utente: possibilit&agrave; di inviare o visualizzare le credenziali di accesso</li>
+<li>[Change] Aggiornate e rimosse alcune icone di Social Network</li>
+<li>[Change] Campi nome, email, sito nei commenti dei Redattori sono modificabili solo dal proprio pannello</li>
+<li>[Change] Conferma su operazioni tramite pulsante e non pi&ugrave; solo con alert javascript</li>
+<li>[Change] Migliorie e correzioni minori al codice e alla struttura del database</li>
+<li><font color="#0000FF">[New]</font> Inserimento e gestione dei Tags per ogni notizia, con nuvola</li>
+<li><font color="#0000FF">[New]</font> Un utente (Redattore) pu&oacute; ora modificare e cancellare i propri commenti inseriti</li>
+<li><font color="#0000FF">[New]</font> I commenti dei visitatori possono essere segnalati via email all&apos;amministratore</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di citare un commento di un visitatore nel proprio</li>
+<li><font color="#0000FF">[New]</font> Conteggio ban: indirizzi IP ordinabili per data</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di disattivare totalmente i commenti per integrare, ad esempio, servizi terzi come Disqus</li>
+<li><font color="#0000FF">[New]</font> Nelle ricerche l'amministratore/redattore pu&oacute; cercare anche tutti i propri commenti inseriti</li>
+<li><font color="#0000FF">[New]</font> Visualizzazione del singolo commento in una nuova pagina</li>
+<li><font color="#0000FF">[New]</font> Funzionalit&agrave; Trova e Sostituisci anche per i commenti</li>
+<li><font color="#0000FF">[New]</font> Nuovo stile di formattazione per testo evidenziabile</li>
+</ul>
+</td>
+</tr>      
+	
+	<tr>                                           
+            <td class="text" align="center" valign="top"><br /><br /><b>Cambiamenti nella versione 1.2.4</b></td> 
+          </tr> 
+<tr>
+<td>
+<ul>
+<li><font color="#FF0000">[Fix]</font> Corretta possibilit&agrave; di eseguire operazioni senza permessi</li>
+<li><font color="#FF0000">[Fix]</font> Corretto inserimento e visualizzazione del sito del visitatore nei commenti</li>
+<li><font color="#FF0000">[Fix]</font> Corretto il download del backup in formato compresso</li>
+<li>[Change] I requisiti minimi dell&apos;applicazione adesso sono: PHP >= 5.5.0</li>
+<li>[Change] Le dimensioni del corpo delle news e altre ora si impostano nel codice HTML e non pi&ugrave; nel database</li>
+<li>[Change] Rimosse e aggiornate alcune icone, social network e Instant Messaging</li>
+<li>[Change] Migliorata la leggibilit&agrave; della dimensione dei file in upload</li>
+<li>[Change] Migliorata la leggibilit&agrave; del numero di commenti con il separatore di migliaia</li>
+<li>[Change] I commenti pubblici ora sono ordinati in ordine cronologico, prima i pi&ugrave; recenti</li>
+<li>[Change] Classe FPDF aggiornata alla versione pi&ugrave; recente</li>
+<li>[Change] Nel PDF ora il titolo e le info delle news sono stampati soltanto nella prima pagina</li>
+<li>[Change] Migliorata la sicurezza e la gestione degli accessi tramite password_hash() e non pi&ugrave; con MD5</li>
+<li>[Change] Dopo le operazioni su news, utenti, commenti in pagine intermedie ora si viene rediretti alla stessa pagina</li>
+<li>[Change] Compatibilit&agrave; con PHP 7</li>
+<li>[Change] Migliorie e correzioni minori al codice e alla struttura del database</li>
+<li><font color="#0000FF">[New]</font> Voce del men&ugrave; evidenziata a seconda della pagina in cui ci si trova</li>
+<li><font color="#0000FF">[New]</font> Conteggio degli IP bannati nei commenti e nei tentativi di login errati</li>
+<li><font color="#0000FF">[New]</font> White list per gli IP che non devono essere bloccati per login errati</li>
+<li><font color="#0000FF">[New]</font> Aggiunto campo per indicare il proprio profilo Instagram</li>
+<li><font color="#0000FF">[New]</font> Aggiunti i formati .m4a, .mp3, .mp4 ai file in upload</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di mostrare in chiaro la password durante la digitazione</li>
+</ul>
+</td>
+</tr>      
+	  
+<tr>                                           
+            <td class="text" align="center" valign="top"><br /><br /><b>Cambiamenti nella versione 1.2.3</b></td> 
+          </tr> 
+<tr>
+<td>
+<ul>
+<li><font color="#FF0000">[Fix]</font> Nell&apos;elenco dei files non vengono creati correttamente i link con le thumbnails</li>
+<li><font color="#FF0000">[Fix]</font> Nell&apos;elenco dei files non si viene reindirizzati alla pagina giusta dopo la cancellazione di un file</li>
+<li><font color="#FF0000">[Fix]</font> Se caricato un file .jpeg la query sql che si occupa di cercarlo tra le news fallisce</li>
+<li><font color="#FF0000">[Fix]</font> Le thumbnails per i file .jpeg non vengono create correttamente</li>
+<li><font color="#FF0000">[Fix]</font> Se un file contiene delle parentesi non viene creato correttamente il link per inserirlo</li>
+<li><font color="#FF0000">[Fix]</font> Possibilit&agrave; di eseguire un&apos;operazione pur non avendone i diritti</li>
+<li><font color="#FF0000">[Fix]</font> In searchadmin ora la query ricerca anche tra i nomi dei file inseriti come immagine di apertura</li>
+<li><font color="#FF0000">[Fix]</font> Un file con estensione maiuscola manda in errore la query che lo elenca</li>
+<li>[Change] I requisiti minimi dell&apos;applicazione adesso sono: PHP >= 5.0.0 e Mysql >= 4.1.13</li>
+<li>[Change] Aggiunte, modificate e rimosse icone e funzioni per aggregatori e social network</li>
+<li>[Change] Rimosse alcune funzioni deprecate di PHP</li>
+<li>[Change] L&apos;accesso al database MySQL ora avviene tramite l&apos;estensione mysqli</li>
+<li>[Change] Per creare la thumbnail di un&apos;immagine ora viene considerata anche l&apos;altezza</li>
+<li>[Change] Il file inviato ora viene rinominato solo se gi&agrave; presente sul server, altrimenti mantiene il proprio nome favorendo la leggibilit&agrave; nella notizia e nei risultati dei motori di ricerca</li>
+<li>[Change] Migliorata l&apos;anteprima della notizia che adesso ha la stessa larghezza di quando sar&agrave; pubblicata</li>
+<li>[Change] Rafforzato il CAPTCHA con ulteriori combinazioni da riportare</li>
+<li>[Change] Se viene compilato il campo honeypot (per esempio dagli spambot) l&apos;indirizzo IP del visitatore/bot viene automaticamente bannato</li>
+<li>[Change] Il form di inserimento commenti ora non &egrave; pi&ugrave; accessibile se l&apos;indirizzo IP del visitatore risulta bannato</li>
+<li>[Change] I termini bannati nei commenti ora sono case Insensitive</li>
+<li>[Change] I valori del form dei commenti, di invio email agli utenti e di segnalazione notizia ora vengono mantenuti anche dopo aver cliccato su Submit</li>
+<li>[Change] Migliorata la leggibilit&agrave; del numero di letture con il separatore di migliaia</li>
+<li>[Change] Rimosso il controllo sull&apos;User-Agent dell&apos;utente loggato</li>
+<li>[Change] Migliorie e correzioni minori al codice e alla struttura del database</li>
+<li><font color="#0000FF">[New]</font> Protezione da attacchi brute force al login: dopo N tentativi errati viene bloccato l'IP per N minuti</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di posticipare la data di pubblicazione di una notizia</li>
+<li><font color="#0000FF">[New]</font> L&apos;amministratore pu&ograve; approvare o meno ogni notizia prima di renderla pubblica</li>
+<li><font color="#0000FF">[New]</font> Aggiunti nuovi formati di file per l'upload, tra cui bitmap, mappe di Google Earth, torrent, docx, xlsx, apps per Android e Apple e altri tipi di file</li>
+<li><font color="#0000FF">[New]</font> Aggiunto BBcode per inserire le mappe di Google</li>
+<li><font color="#0000FF">[New]</font> Aggiunto BBcode per colorare di rosso e blu parti del testo</li>
+<li><font color="#0000FF">[New]</font> Nuova funzione di backup con possibilit&agrave; di salvare il file .gz anche sul web server</li>
+</ul>
+</td>
+</tr>      
+		 <tr>                                           
+            <td class="text" align="center" valign="top"><br /><br /><b>Cambiamenti nella versione 1.2.2</b></td> 
+          </tr> 
+<tr>
+<td>
+<ul>
+<li><font color="#FF0000">[Fix]</font> Impostazioni: se funzioni di riconoscimento PHP o Apache sono disabilitate si blocca il caricamento della pagina</li>
+<li><font color="#FF0000">[Fix]</font> Commenti: se l&apos;autore della notizia cambia email/sito/nome il valore non viene aggiornato e il suo post non viene colorato diversamente</li>
+<li><font color="#FF0000">[Fix]</font> L&apos;URL dell&apos;autore del commento ora pu&ograve; essere anche https e ftp</li>
+<li><font color="#FF0000">[Fix]</font> Commenti: URL con #! (es. nomi Twitter) non vengono correttamente linkati nei commenti</li>
+<li><font color="#FF0000">[Fix]</font> Profilo utente e Amministratore: se il sito web &egrave; in https non viene linkato correttamente</li>
+<li><font color="#FF0000">[Fix]</font> Migliorato il controllo sull&apos;user-agent dell&apos;utente loggato</li>
+<li><font color="#FF0000">[Fix]</font> Reinvio password: ora &egrave; possibile solo se un utente non &egrave; gi&agrave; loggato</li>
+<li><font color="#FF0000">[Fix]</font> Reinvio password: corretto un possibile Warning di headers already sent</li>
+<li><font color="#FF0000">[Fix]</font> Box ultime notizie e archivio: se una notizia comincia con un tag questo viene visualizzato per esteso</li>
+<li><font color="#FF0000">[Fix]</font> Ricerca: corretto l&apos;ordinamento dei risultati per pertinenza</li>
+<li><font color="#FF0000">[Fix]</font> Ricerca: categoria selezionata non mantenuta nel men&ugrave; a tendina e n&egrave; durante la paginazione</li>
+<li><font color="#FF0000">[Fix]</font> Caratteri speciali visualizzabili correttamente anche con versioni PHP >= 5.4.0</li>
+<li><font color="#FF0000">[Fix]</font> Un utente non attivo non pu&ograve; postare commenti col proprio nick</li>
+<li><font color="#FF0000">[Fix]</font> Username Skype ora impostabili fino al massimo consentito (32 caratteri)</li>
+<li>[Change] Modifica news: link alla pagina dei commenti se presenti per quella notizia</li>
+<li>[Change] Elenco file inviati visualizzabile in una popup</li>
+<li>[Change] Rafforzato CAPTCHA con possibilit&agrave; di inserire solo lettere/numeri e aggiunto campo nascosto (honeypot)</li>
+<li>[Change] Aggiornati URL degli account Twitter e Facebook per gli utenti registrati</li>
+<li>[Change] Rimosso il contatore di stampe per le notizie</li>
+<li>[Change] Commenti: autore, data e sito con font pi&ugrave; piccolo</li>
+<li>[Change] Nella sezione Categorie aggiunto il totale dei commenti per ogni singola categoria</li>
+<li>[Change] Ricerca amministrazione: aggiunto grassetto per i termini trovati nel titolo</li>
+<li>[Change] Aggiunto CAPTCHA anche su reinvio nuova password</li>
+<li>[Change] Aggiornata la classe FPDF all&apos;ultima versione disponibile</li>
+<li>[Change] Modificati, aggiunti e rimossi social network, aggregatori e instant messaging</li>
+<li>[Change] Inserisci e Modifica news: aggiunto un men&ugrave; a tendina con 5 Instant Messaging</li>
+<li>[Change] Amministrazione: colorate di rosso le operazioni pi&ugrave; delicate (cancellazione news, rimozione file, ecc.) nei men&ugrave; a tendina</li>
+<li>[Change] Media di notizie scritte per giorno in formato pi&ugrave; leggibile</li>
+<li>[Change] Data upload nel nome del file cambiata in gg/mm/aa</li>
+<li>[Change] Altre modifiche minori al codice alla struttura del database</li>
+<li><font color="#0000FF">[New]</font> Gli utenti possono essere autorizzati o meno a pubblicare news</li>
+<li><font color="#0000FF">[New]</font> Filtri per le parole nei commenti</li>
+<li><font color="#0000FF">[New]</font> Filtri per gli indirizzi IP nei commenti, con range e classi</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di associare un&apos; immagine descrittiva per ogni categoria</li>
+<li><font color="#0000FF">[New]</font> Link per inserire i file direttamente nel corpo della notizia dalla popup che li elenca</li>
+<li><font color="#0000FF">[New]</font> Dimensione massima dei file in upload impostabile dal pannello amministrazione e non pi&ugrave; da file di config</li>
+<li><font color="#0000FF">[New]</font> Aggiunto ordinamento dei file inviati per nome, dimensione e data</li>
+<li><font color="#0000FF">[New]</font> Creazione automatica di thumbnail se l&apos;immagine inviata &egrave; pi&ugrave; larga dell'area della notizia</li>
+<li><font color="#0000FF">[New]</font> Amministrazione: ricerca anche nei commenti</li>
+<li><font color="#0000FF">[New]</font> Aggiunto totale spazio occupato nel database dalle tabelle dell&apos;applicazione</li>
+<li><font color="#0000FF">[New]</font> Aggiunto formato americano per le date: AM e PM</li>
+<li><font color="#0000FF">[New]</font> Aggiunto CAPTCHA anche per la segnalazione news</li>
+<li><font color="#0000FF">[New]</font> Avviso di Caps Lock attivo al login e nei cambi password</li>
+<li><font color="#0000FF">[New]</font> Localizzazione completa (compresi Installazione, Aggiornamento e Guida) in italiano, inglese, francese, tedesco e spagnolo</li>
+</ul>
+</td>
+</tr>                                 
+          <tr>                                           
+            <td class="text" align="center" valign="top"><br /><br /><b>Cambiamenti nella versione 1.2.1</b></td> 
+          </tr>     
+<tr>
+<td>
+<ul>
+<li><font color="#FF0000">[Fix]</font> Errore navigazione e visualizzazione news in caso di ID non trovato (possibile Path Disclosure)</li>
+<li><font color="#FF0000">[Fix]</font> Warning di PHP in caso di directory di upload mancante o senza permessi validi</li>
+<li><font color="#FF0000">[Fix]</font> Warning di PHP in caso di funzioni disabilitate da php.ini</li>
+<li><font color="#FF0000">[Fix]</font> Impossibile effettuare operazioni in caso di database o tabelle con caratteri alternativi nel nome</li>
+<li><font color="#FF0000">[Fix]</font> Rivisto conteggio dei file inviati dagli utenti: ora pi&ugrave; verosimile</li>
+<li><font color="#FF0000">[Fix]</font> Backup: campi di tipo Numeric valorizzati con &apos;&apos; invece che con 0</li>
+<li><font color="#FF0000">[Fix]</font> Upload: possibile iniezione di codice nei nomi dei file</li>
+<li><font color="#FF0000">[Fix]</font> Upload: impossibile rimuovere file con segni particolari nel nome</li>
+<li><font color="#FF0000">[Fix]</font> Warning di PHP su mktime() in caso di error_reporting settato con E_STRICT</li>
+<li><font color="#FF0000">[Fix]</font> Segnalazione news: controllo campo mittente vuoto</li>
+<li><font color="#FF0000">[Fix]</font> Invia email utenti: controllo campo oggetto vuoto</li>
+<li>[Change] Invio email agli utenti: aggiunto tag title con nomi degli utenti selezionati</li>
+<li>[Change] Archivio e ricerca: tolto ordinamento per nr. di stampe</li>
+<li>[Change] Archivio: evidenziata chiave di ordinamento news</li>
+<li>[Change] Ricerca pubblica e in Amministrazione: link a Google solo in caso di nessun risultato trovato</li>
+<li>[Change] Dimensione in KiB dei file uploadati visualizzata accanto ai nomi nelle news</li>
+<li>[Change] Aggiunto font size per i link nel men&ugrave; in Amministrazione</li>
+<li>[Change] Selezione automatica dei valori numerici nei campi di testo</li>
+<li>[Change] Disabilitazione Submit in assenza di file uploadati da cancellare</li>
+<li>[Change] Aumentata la durata del cookie di accesso a 30 giorni</li>
+<li>[Change] Popup autore: aggiunto link per Facebook e Twitter</li>
+<li>[Change] Aggiornati i link di alcuni aggregatori, aggiunto Google Buzz, rimosso Google Wave</li>
+<li>[Change] Controllo pi&ugrave; accurato per la data di ultimo accesso degli utenti al sistema</li>
+<li>[Change] Archivio news: modificati i link in base all&apos;ordinamento scelto</li>
+<li>[Change] Elenco utenti: popup per visualizzare i file inviati, senza andare nel profilo</li>
+<li>[Change] Password temporanea ora memorizzata come hash md5 + salt</li>
+<li>[Change] Conferma nuova password in caso di modifica</li>
+<li>[Change] Migliorata la sicurezza per la funzione mail()</li>
+<li>[Change] Migliorata la sicurezza delle sessioni: rigenerazione id e controllo User Agent</li>
+<li>[Change] Nr. di letture e stampe non viene incrementato dagli utenti loggati</li>
+<li>[Change] Modifiche minori ed ottimizzazioni al codice e alla struttura del database</li>
+<li><font color="#0000FF">[New]</font> Inserimento commenti da parte dei visitatori con disattivazione e moderazione</li>
+<li><font color="#0000FF">[New]</font> Categorie di news: inserimento, modifica e cancellazione</li>
+<li><font color="#0000FF">[New]</font> Trova/sostituisci nell&apos;oggetto e/o nel testo delle news</li>
+<li><font color="#0000FF">[New]</font> Possibilit&agrave; di attribuire le news ad altri utenti</li>
+<li><font color="#0000FF">[New]</font> Nomi livelli per Amministratore e Redattore personalizzabili</li>
+<li><font color="#0000FF">[New]</font> Aggiunti campi per Facebook e Twitter ai profili degli utenti</li>
+<li><font color="#0000FF">[New]</font> Ridimensionamento immagini nelle news se troppo larghe</li>
+<li><font color="#0000FF">[New]</font> Media giornaliera di news inserite per ogni utente</li>
+<li><font color="#0000FF">[New]</font> Aggiunti i formati .ods, .odt, .png, .rar, .doc, .xls ai file in upload</li>
+</ul>
+</td>
+</tr>
+	</table>
+<br />
+		<table width="80%" border="0" cellpadding="2" cellspacing="2" align="center">
+        <tr>
+          <td align="center" class="text2" bgcolor="#C2D8FE"><!-- (C) Spacemarc News -->Spacemarc News 1.2.5 &copy;
+            <a href="http://www.spacemarc.it" target="_blank" class="piccolo">Spacemarc.it</a></td>
+        </tr>
+      </table>
+  </body>
+</html>
