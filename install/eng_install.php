@@ -3,7 +3,6 @@
 /*****************************************************************
 *  Spacemarc News
 *  Author and copyright (C): Marcello Vitagliano
-*  Web site: www.spacemarc.it
 *  License: GNU General Public License
 *
 *  This program is free software: you can redistribute it and/or
@@ -28,7 +27,7 @@ $lang = Array(
 	'password' => 'Choose a password',
 	'password2' => 'Choose a password for access',
 	'sito' => 'Name of web site',
-	'sito2' => 'Example: Spacemarc.it',
+	'sito2' => 'Example: website.tld',
 	'url' => 'Web site URL',
 	'url2' => 'With http:// and without final /',
 	'installa' => 'Install',
