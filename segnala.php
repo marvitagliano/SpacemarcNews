@@ -3,7 +3,6 @@
 /*****************************************************************
  *  Spacemarc News
  *  Author and copyright (C): Marcello Vitagliano
- *  Web site: www.spacemarc.it
  *  License: GNU General Public License
  *
  *  This program is free software: you can redistribute it and/or
@@ -23,7 +22,7 @@ require_once (dirname(__FILE__) . '/lang/' . $language . '.php');
 // connessione a mysql
 $db = @mysqli_connect($db_host, $db_user, $db_password, $db_name);
 
-//se c'è l'id della notizia inviato via GET ed è di tipo numerico ed è presente in tabella vado avanti
+//se c'Ã¨ l'id della notizia inviato via GET ed Ã¨ di tipo numerico ed Ã¨ presente in tabella vado avanti
 $get_id = (isset($_GET['id']) && preg_match('/^[0-9]{1,8}$/', $_GET['id'])) ? intval($_GET['id']) : 0;
 $errore = NULL;
 $errore_captcha = NULL;
