@@ -3,7 +3,6 @@
 /*****************************************************************
  *  Spacemarc News
  *  Author and copyright (C): Marcello Vitagliano
- *  Web site: www.spacemarc.it
  *  License: GNU General Public License
  *
  *  This program is free software: you can redistribute it and/or
