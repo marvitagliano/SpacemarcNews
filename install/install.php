@@ -3,7 +3,6 @@
 /*****************************************************************
  *  Spacemarc News
  *  Author and copyright (C): Marcello Vitagliano
- *  Web site: www.spacemarc.it
  *  License: GNU General Public License
  *
  *  This program is free software: you can redistribute it and/or
@@ -80,8 +79,7 @@ echo '<textarea name="license" rows="10" cols="100" readonly="readonly">' . $rd 
           </tr>                                        
           <tr>                           
             <td align="center" class="text2" bgcolor="#C2D8FE">Spacemarc News 
-              <?php echo $version; ?> &copy;                
-              <a href="http://www.spacemarc.it" target="_blank" class="piccolo">Spacemarc.it</a></td>                         
+              <?php echo $version; ?> &copy;</td>                         
           </tr>                           
         </table>                  
       </form>  <br /> 
