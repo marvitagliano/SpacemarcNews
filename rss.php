@@ -11,7 +11,7 @@
  *  of the License, or (at your option) any later version.
  *****************************************************************/
  
-header('Content-type: text/xml; charset=ISO-8859-1');
+header('Content-type: text/xml; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/config.php');
@@ -24,7 +24,7 @@ $db = @mysqli_connect($db_host, $db_user, $db_password, $db_name);
 //estraggo alcune impostazioni
 $conf = @mysqli_query($db, "SELECT nome_sito, url_sito FROM `$tab_config`");
 $rowconf = @mysqli_fetch_array($conf);
-echo "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 echo "<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "<channel>\n";
 echo "<atom:link href=\"" . $rowconf['url_sito'] . "/$news_dir/rss.php\" rel=\"self\" type=\"application/rss+xml\" />\n";
@@ -37,8 +37,8 @@ echo "<language>IT-it</language>\n\n";
 $query = @mysqli_query($db, "SELECT nt.id, nt.titolo, nt.testo, nt.data_pubb, nu.nome_cognome FROM `$tab_news` nt JOIN `$tab_utenti` nu ON nu.user_id=nt.user_id WHERE nt.news_approvata = 1 AND nt.data_pubb < " . time() . " ORDER BY nt.data_pubb DESC LIMIT 0,10");
 
 while ($row = @mysqli_fetch_array($query)) {
-    $titolo = html_entity_decode($row['titolo'], ENT_QUOTES, "ISO-8859-1");
-    $autore = html_entity_decode($row['nome_cognome'], ENT_QUOTES, "ISO-8859-1");
+    $titolo = html_entity_decode($row['titolo'], ENT_QUOTES, "UTF-8");
+    $autore = html_entity_decode($row['nome_cognome'], ENT_QUOTES, "UTF-8");
     $testo = nl2br($row['testo']);
     $format_text = array(
 		'{\[e\](\r\n|\r|\n)*(.+)\[/e\]}siU',   
