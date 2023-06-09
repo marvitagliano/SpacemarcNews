@@ -63,5 +63,5 @@ $img_path = '/' . $news_dir . '/' . $img_dir;
 $upload_path = $news_dir . '/' . $file_dir;
 
 //versione attuale dello script - NON MODIFICARE
-$version = '1.2.5';
+$version = '1.2.6';
 ?>
