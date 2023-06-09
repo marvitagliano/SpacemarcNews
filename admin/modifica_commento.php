@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/../config.php');
@@ -107,10 +107,10 @@ if (isset($_POST['submit'])) {
         }
     }
     else {
-        $author = htmlspecialchars($_POST['author'], ENT_QUOTES, "ISO-8859-1");
-        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1");
-        $url = htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1");
-        $commento = htmlspecialchars($_POST['commento'], ENT_QUOTES, "ISO-8859-1");
+        $author = htmlspecialchars($_POST['author'], ENT_QUOTES, "UTF-8");
+        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8");
+        $url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
+        $commento = htmlspecialchars($_POST['commento'], ENT_QUOTES, "UTF-8");
         
         $approvato = (isset($_POST['cbapprovato'])) ? 1 : 0;
 
