@@ -11,7 +11,7 @@
  *  of the License, or (at your option) any later version.
  *****************************************************************/
  
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/config.php');
