@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">        
@@ -255,7 +255,7 @@ if (@mysqli_num_rows($sql_news) > 0) {
 			$header.= "Return-Path: " . $_SERVER['SERVER_ADMIN'] . "\n";
 			$header.= "X-Mailer: PHP " . $phpversion . "\n";
 			$header.= "MIME-Version: 1.0\n";
-			$header.= "Content-type: text/plain; charset=ISO-8859-1\n";
+			$header.= "Content-type: text/plain; charset=UTF-8\n";
 			$header.= "Content-Transfer-encoding: 7bit\n";
 			@mail($rownews['EmailAdmin'], "" . $rowconf['nome_sito'] . ": " . $lang['report_email_oggetto'] . " ID " . $id_comment_value . "", "" . $lang['report_email_testo'] . " (" . $rbr_value . "):\n " . $rowconf['url_sito'] . "/" . $news_dir . "/viewcomment.php?id_comm=" . $id_comment_value . "\n Reported by: " . $_SERVER['REMOTE_ADDR'] .  "\n-- \n" . $rowconf['url_sito'] . "", $header);
 			
@@ -284,28 +284,28 @@ if (@mysqli_num_rows($sql_news) > 0) {
     
     switch ($rowconf['formato_data']) {
         case 1:
-            $data = strftime("%a %d %b %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("D j F Y, H:i", $rownews['data_pubb']);
         break;
         case 2:
-            $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $rownews['data_pubb']));
+            $data = date("l j F Y, H:i", $rownews['data_pubb']);
         break;
         case 3:
-            $data = strftime("%d/%m/%Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d/m/Y, H:i", $rownews['data_pubb']);
         break;
         case 4:
-            $data = strftime("%d %b %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d M Y, H:i", $rownews['data_pubb']);
         break;
         case 5:
-            $data = strftime("%d %B %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d F Y, H:i", $rownews['data_pubb']);
         break;
         case 6:
-            $data = strftime("%m/%d/%Y, %I:%M %p", $rownews['data_pubb']);
+            $data = date("m/d/Y, H:i", $rownews['data_pubb']);
         break;
         case 7:
-            $data = strftime("%B %d, %Y %I:%M %p", $rownews['data_pubb']);
+            $data = date("F d, Y H:i", $rownews['data_pubb']);
         break;
         case 8:
-            $data = strftime("%I:%M %p %B %d, %Y", $rownews['data_pubb']);
+            $data = date("H:i F d, Y", $rownews['data_pubb']);
         break;
     }
     echo '<div id="container" style="width: 605px">';
@@ -346,30 +346,37 @@ if (@mysqli_num_rows($sql_news) > 0) {
     // mostro la prima notizia precedente quella corrente
     $sql_prec = @mysqli_query($db, "SELECT nt.id, nt.titolo, nt.data_pubb FROM `$tab_news` nt JOIN `$tab_utenti` nu ON nu.user_id=nt.user_id AND nt.news_approvata = 1 WHERE nt.data_pubb < " . $rownews['data_pubb'] . " AND nt.data_pubb < " . time() . " ORDER BY nt.data_pubb DESC LIMIT 1");
     $rowprec = @mysqli_fetch_array($sql_prec);
-    $idprec = $rowprec['id'];
-    $titoloprec = $rowprec['titolo'];
+
     echo '<div class="pager_art" style="width: 300px">';
     
-    if ($idprec >= 1) {
-        echo '<br />&#129152; <a href="view.php?id=' . $idprec . '" class="piccolo">' . $titoloprec . '</a></div>';
-    }
-    else {
-        echo '&nbsp;</div>';
-    }
-
+    if (mysqli_num_rows($sql_prec) > 0) {
+    
+		if ( $rowprec['id'] >= 1 ) {
+			echo '<br />&#129152; <a href="view.php?id=' . $rowprec['id'] . '" class="piccolo">' . $rowprec['titolo'] . '</a></div>';
+		}
+		else {
+			echo '&nbsp;</div>';
+		}
+	} else {
+		echo '&nbsp;</div>';
+	}
+	
     //mostro la prima notizia successiva a quella corrente
     $sql_succ = @mysqli_query($db, "SELECT nt.id, nt.titolo, nt.data_pubb FROM `$tab_news` nt JOIN `$tab_utenti` nu ON nu.user_id=nt.user_id AND nt.news_approvata = 1 WHERE nt.data_pubb > " . $rownews['data_pubb'] . " AND nt.data_pubb < " . time() . " ORDER BY nt.data_pubb ASC LIMIT 1");
     $rowsucc = @mysqli_fetch_array($sql_succ);
     
-	if ($rowsucc['data_pubb'] < $rownews['data_pubb']) {
-        echo '<div></div><br /><br />';
-    }
-    else {
-        $idsucc = $rowsucc['id'];
-        $titolosucc = $rowsucc['titolo'];
-        echo '<div class="pager_art" align="right" style="width: 300px"><br /><a href="view.php?id=' . $idsucc . '" class="piccolo">' . $titolosucc . '</a> &#129154;</div><br /><br />';	
+	if (mysqli_num_rows($sql_succ) > 0) {
+		 
+		if ( $rowsucc['data_pubb'] < $rownews['data_pubb']) {
+			echo '<div></div><br /><br />';
+		}
+		else {
+			echo '<div class="pager_art" align="right" style="width: 300px"><br /><a href="view.php?id=' . $rowsucc['id'] . '" class="piccolo">' . $rowsucc['titolo'] . '</a> &#129154;</div><br /><br />';	
+		}
+	} else {
+		echo '<div></div><br /><br />';
 	}
-
+	
     echo '</div>';
    
    //controllo se i commenti sono disattivati globalmente
@@ -390,9 +397,9 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
             $logout = ' <a href="admin/logout.php?ref=c">' . $lang['logout'] . '</a>';
         }
         else {
-            $autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "ISO-8859-1") : NULL;
-            $email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1") : NULL;
-            $sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1") : NULL;
+            $autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "UTF-8") : NULL;
+            $email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8") : NULL;
+            $sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8") : NULL;
 			$readonly = '';	            
             $logout = NULL;
         }
@@ -418,17 +425,17 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
 			$logout = ' <a href="admin/logout.php?ref=c">' . $lang['logout'] . '</a>';
         }
         else {
-            $autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "ISO-8859-1") : NULL;
-            $email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1") : NULL;
-            $sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1") : NULL;
+            $autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "UTF-8") : NULL;
+            $email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8") : NULL;
+            $sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8") : NULL;
 			$readonly = '';	
             $logout = NULL;
         }
     }
     else {
-		$autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "ISO-8859-1") : NULL;
-		$email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1") : NULL;
-		$sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1") : NULL;
+		$autore_value = (isset($_POST['author'])) ? htmlspecialchars($_POST['author'], ENT_QUOTES, "UTF-8") : NULL;
+		$email_value = (isset($_POST['email'])) ? htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8") : NULL;
+		$sito_value = (isset($_POST['url'])) ? htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8") : NULL;
 		$readonly = '';		
         $logout = NULL;
     }
@@ -455,7 +462,7 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
         
         if (isset($_POST['submit'])) {
 
-			$commento_value = (isset($_POST['commento'])) ? htmlspecialchars($_POST['commento'], ENT_QUOTES, "ISO-8859-1") : NULL;
+			$commento_value = (isset($_POST['commento'])) ? htmlspecialchars($_POST['commento'], ENT_QUOTES, "UTF-8") : NULL;
           
             if (trim($_POST['author']) == '' || trim($_POST['commento']) == '') {
                 $campi_vuoti = '<div id="error">' . $lang['commenti_campi_obb'] . '</div><br />';
@@ -483,20 +490,20 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
 							} 
 						
 							else {
-								$author = htmlspecialchars($_POST['author'], ENT_QUOTES, "ISO-8859-1");
-								$email = htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1");
+								$author = htmlspecialchars($_POST['author'], ENT_QUOTES, "UTF-8");
+								$email = htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8");
 								
 								if ( strpos($_POST['url'],'https://') !== false ) {
-									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1");
+									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
 								} elseif ( strpos($_POST['url'],'http://') !== false )  {
-									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1");
+									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
 								} elseif ( trim($_POST['url']) == '' )  {
-									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1");
+									$url = htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
 								} else {
-									$url = 'http://' . htmlspecialchars($_POST['url'], ENT_QUOTES, "ISO-8859-1");
+									$url = 'http://' . htmlspecialchars($_POST['url'], ENT_QUOTES, "UTF-8");
 								}
 								
-								$commento = htmlspecialchars($_POST['commento'], ENT_QUOTES, "ISO-8859-1");
+								$commento = htmlspecialchars($_POST['commento'], ENT_QUOTES, "UTF-8");
 
 								$author = mysqli_real_escape_string($db, trim($author));
 								$email = mysqli_real_escape_string($db, $email);
@@ -550,7 +557,7 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
 											$header.= "Return-Path: " . $_SERVER['SERVER_ADMIN'] . "\n";
 											$header.= "X-Mailer: PHP " . $phpversion . "\n";
 											$header.= "MIME-Version: 1.0\n";
-											$header.= "Content-type: text/plain; charset=ISO-8859-1\n";
+											$header.= "Content-type: text/plain; charset=UTF-8\n";
 											$header.= "Content-Transfer-encoding: 7bit\n";
 											@mail($rownews['EmailAdmin'], "" . $rowconf['nome_sito'] . ": " . $lang['nuovo_commento_email'] . " ID " . $rownews['id'] . "", "" . $lang['nuovo_commento_email'] . ": " . $rowconf['url_sito'] . "/" . $news_dir . "/view.php?id=" . $rownews['id'] . " \n" . $lang['data'] . ": " . date("j M Y G:i:s") . "\n\n-- \n" . $rowconf['url_sito'] . "", $header);
 
@@ -612,28 +619,28 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
         
         switch ($rowconf['formato_data']) {
             case 1:
-                $data_comm = strftime("%a %d %b %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("D j F Y, H:i", $riga_comm['data_comm']);
             break;
             case 2:
-                $data_comm = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $riga_comm['data_comm']));
+                $data_comm = date("l j F Y, H:i", $riga_comm['data_comm']);
             break;
             case 3:
-                $data_comm = strftime("%d/%m/%Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d/m/Y, H:i", $riga_comm['data_comm']);
             break;
             case 4:
-                $data_comm = strftime("%d %b %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d M Y, H:i", $riga_comm['data_comm']);
             break;
             case 5:
-                $data_comm = strftime("%d %B %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d F Y, H:i", $riga_comm['data_comm']);
             break;
             case 6:
-                $data_comm = strftime("%m/%d/%Y, %I:%M %p", $riga_comm['data_comm']);
+                $data_comm = date("m/d/Y, H:i", $riga_comm['data_comm']);
             break;
             case 7:
-                $data_comm = strftime("%B %d, %Y %I:%M %p", $riga_comm['data_comm']);
+                $data_comm = date("F d, Y H:i", $riga_comm['data_comm']);
             break;
             case 8:
-                $data_comm = strftime("%I:%M %p %B %d, %Y", $riga_comm['data_comm']);
+                $data_comm = date("H:i F d, Y", $riga_comm['data_comm']);
             break;
         }
 
@@ -692,7 +699,7 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
         
         $riga_comm['commento'] = preg_replace('~\[qc](.+?);(\d+)\[/qc]~', '<div style="background-color:#FFFFCC; margin:0 auto; width:96%; height: auto; border: 1px solid #DEE3E7; padding: 3px;" class="text2">' . $lang['risposta_a'] . ' <a href="viewcomment.php?id_comm=$2">$1</a></div>', $riga_comm['commento']);
 
-        echo '<a name="commento-' . $riga_comm['id_comm'] . '"></a><div id="testo_commento_' . $i . '" class="text" align="left" style="background-color: ' . $colore . '; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 3px;">' . preg_replace('/([(http|https|ftp)]+:\/\/[\w-?&:;#!~=\.\/\@]+[\w\/])/i', '<a href="$1" target="_blank" rel="nofollow">$1</a>', nl2br($riga_comm['commento'])) . '<br /><br />
+        echo '<a name="commento-' . $riga_comm['id_comm'] . '"></a><div id="testo_commento_' . $i . '" class="text" align="left" style="background-color: ' . $colore . '; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 3px;">' . preg_replace('/([(http|https|ftp)]+:\/\/[\w\-?&:;#!~=\.\/\@]+[\w\/])/i', '<a href="$1" target="_blank" rel="nofollow">$1</a>', nl2br($riga_comm['commento'])) . '<br /><br />
 			<hr style="color: #444444; border-style: dashed; border-width: 1px 0px 0px 0px; width: 99%; margin-bottom: 4px;" />
 			<span style="font-size: 10px;"> <img src="' . $img_path . '/commpub.png" border="0" alt="" /> ' . $link_autore . ' &nbsp; &#128338; <a href="' . $rowconf['url_sito'] . '/' . $news_dir . '/viewcomment.php?id_comm=' . $riga_comm['id_comm'] . '" title="Nr. ' . $riga_comm['id_comm'] . '">' . $data_comm . '</a>  &nbsp; &#8629; <a href="#form_commento" onclick="InserisciQuote(\'[qc]' . $riga_comm['autore'] . ';' . $riga_comm['id_comm'] . '[/qc]\n' . '\'); return true;">' . $lang['quote'] . '</a> &nbsp; &#9888; <a href="javascript:void(0);" onclick="reportComment(\'report_' . $riga_comm['id_comm'] . '\');">' . $lang['report'] . '</a></span> ' . $comm_approvato . '</div><div id="report_' . $riga_comm['id_comm'] . '" class="report">';
 
