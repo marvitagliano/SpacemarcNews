@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/config.php');
@@ -40,9 +40,9 @@ if (@mysqli_num_rows($result) == 0) {
 
 if (isset($_POST['submit'])) {
 	
-	$mittente_value = (isset($_POST['mittente'])) ? htmlspecialchars($_POST['mittente'], ENT_QUOTES, "ISO-8859-1") : NULL;
-	$mail_mittente_value = (isset($_POST['mail_mittente'])) ? htmlspecialchars($_POST['mail_mittente'], ENT_QUOTES, "ISO-8859-1") : NULL;
-	$mail_amico_value = (isset($_POST['mail_amico'])) ? htmlspecialchars($_POST['mail_amico'], ENT_QUOTES, "ISO-8859-1") : NULL;
+	$mittente_value = (isset($_POST['mittente'])) ? htmlspecialchars($_POST['mittente'], ENT_QUOTES, "UTF-8") : NULL;
+	$mail_mittente_value = (isset($_POST['mail_mittente'])) ? htmlspecialchars($_POST['mail_mittente'], ENT_QUOTES, "UTF-8") : NULL;
+	$mail_amico_value = (isset($_POST['mail_amico'])) ? htmlspecialchars($_POST['mail_amico'], ENT_QUOTES, "UTF-8") : NULL;
 
     if (!preg_match('/^[.a-zA-Z0-9\-\'\s]{1,20}$/', $_POST['mittente']) || !preg_match('/^[.a-z0-9_-]+@[.a-z0-9_-]+\.[a-z]{2,4}$/', $_POST['mail_mittente']) || !preg_match('/^[.a-z0-9_-]+@[.a-z0-9_-]+\.[a-z]{2,4}$/', $_POST['mail_amico'])) {
         $errore = '<div id="error">' . $lang['compila_correttamente'] . '</div>';
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
             $errore_captcha = '<div id="error">' . $lang['antispam_error'] . '</div>';
         }
         else {
-            $titolo2 = html_entity_decode($row['titolo'], ENT_QUOTES, 'ISO-8859-1');
+            $titolo2 = html_entity_decode($row['titolo'], ENT_QUOTES, 'UTF-8');
             $titoloChars = array(
                 '&rsquo;' => '\'',
                 '&euro;' => 'E'
@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
             $header.= "Return-Path: " . $_POST['mail_mittente'] . "\n";
             $header.= "X-Mailer: PHP " . $phpversion . "\n";
             $header.= "MIME-Version: 1.0\n";
-            $header.= "Content-type: text/plain; charset=ISO-8859-1\n";
+            $header.= "Content-type: text/plain; charset=UTF-8\n";
             $header.= "Content-Transfer-encoding: 7bit\n";
             
             if (@mail($_POST['mail_amico'], $lang['leggi_news1'] . " " . $row['nome_sito'] . "", $lang['ciao'] . ",\n" . $_POST['mittente'] . " " . $lang['leggi_news2'] . ": $titolo2 \n\n" . $lang['leggi_news3'] . ": " . $row['url_sito'] . "/$news_dir/view.php?id=" . $row['id'] . "\n\n$messaggio", $header)) {
