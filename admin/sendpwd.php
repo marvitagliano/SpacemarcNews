@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
             $result = @mysqli_query($db, "SELECT nu.nome_cognome, nu.email, nc.url_sito FROM `$tab_utenti` nu, `$tab_config` nc WHERE nu.email='" . $_POST['email'] . "' AND nu.attivo=1 LIMIT 1");
             $riga = @mysqli_fetch_assoc($result);
             
-            if ($riga['email'] == $_POST['email']) {
+            if ( mysqli_num_rows($result) > 0 && $riga['email'] == $_POST['email'] ) {
                 
                 $phpversion = (!@phpversion()) ? "N/A" : phpversion();
                 $pwd_random = NewPassword();
