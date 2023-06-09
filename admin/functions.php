@@ -218,7 +218,7 @@ function data_nascita() {
 }
 
 function socialnet() {
-    global $lang, $facebook2, $facebook_errato, $facebook_ok, $twitter2, $twitter_errato, $twitter_ok, $instagram2, $instagram_errato, $instagram_ok;
+    global $lang, $facebook_errato, $facebook_ok, $twitter_errato, $twitter_ok, $instagram_errato, $instagram_ok;
     
     if (trim($_POST['facebook']) != '') {
         $facebook = $_POST['facebook'];
@@ -237,7 +237,6 @@ function socialnet() {
         $facebook_errato = NULL;
         $facebook_ok = 1;
     }
-    $facebook2 = $facebook;
     
     if (trim($_POST['twitter']) != '') {
         $twitter = $_POST['twitter'];
@@ -256,7 +255,6 @@ function socialnet() {
         $twitter_errato = NULL;
         $twitter_ok = 1;
     }
-    $twitter2 = $twitter;
     
     if (trim($_POST['instagram']) != '') {
         $instagram = $_POST['instagram'];
@@ -275,7 +273,7 @@ function socialnet() {
         $instagram_errato = NULL;
         $instagram_ok = 1;
     }
-    $instagram2 = $instagram;
+
 }
 
 function altri_campi() {
@@ -611,7 +609,7 @@ function immagine_apertura() {
         $immagine = htmlspecialchars(trim($_POST['immagine']) , ENT_QUOTES, "ISO-8859-1");
     }
     else {
-        $immagine = NULL;
+        $immagine = '';
     }
 }
 
