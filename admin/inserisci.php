@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //calcolo il tempo di generazione della pagina (1a parte)
 $mtime1 = explode(" ", microtime());
@@ -32,7 +32,7 @@ $testo = NULL;
 $data_pubb = NULL;
 $letture = 0;
 $tags = NULL;
-$immagine = NULL;
+$immagine = (isset($_POST['immagine'])) ? $_POST['immagine'] : NULL;
 $div_preview = NULL;
 $insert_empty = NULL;
 $insert_msg_ok = NULL;
@@ -70,10 +70,10 @@ if (isset($_POST['preview'])) {
     }
 
     //ridefinisco le variabili per visualizzarne correttamente il contenuto nel form
-	$titolo = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "ISO-8859-1");
-	$testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "ISO-8859-1");
+	$titolo = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "UTF-8");
+	$testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "UTF-8");
     $letture = (isset($_POST['letture'])) ? intval($_POST['letture']) : 0;
-	$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "ISO-8859-1");    
+	$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "UTF-8");    
     $commenti_checked = (isset($_POST['abilita_commenti'])) ? 'checked="checked"' : NULL;
     $notifica_commenti_checked = (isset($_POST['notifica_commenti'])) ? 'checked="checked"' : NULL;
     
@@ -135,10 +135,14 @@ elseif (isset($_POST['submit'])) {
         $notifica_commenti_checked = NULL;
     }
     
-	$titolo = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "ISO-8859-1");
-	$testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "ISO-8859-1");
-	$immagine = mysqli_real_escape_string($db, $immagine);
-	$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "ISO-8859-1");   
+	$titolo = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "UTF-8");
+	$testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "UTF-8");
+	
+	if ( !empty($_POST['immagine']) ) {
+		$immagine = mysqli_real_escape_string($db, $immagine);
+	}	
+	
+	$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "UTF-8");   
     
     if (trim($titolo) == '' || trim($testo) == '') {
         $insert_empty = '<div id="error">' . $lang['tit_text_obbl'] . '</div><br />';
@@ -148,7 +152,7 @@ elseif (isset($_POST['submit'])) {
         $insert_empty = NULL;
 		$testo = mysqli_real_escape_string($db, $testo);
 		$titolo = mysqli_real_escape_string($db, $titolo);
-		$immagine = mysqli_real_escape_string($db, $immagine);	
+		$immagine = mysqli_real_escape_string($db, $immagine);
 
 		//inserimento news
         switch ($q_riga_perm['permessi']) {
@@ -172,7 +176,7 @@ elseif (isset($_POST['submit'])) {
 			if ( !empty($_POST['tags']) ) {
 			
 				$last_id_news = mysqli_insert_id($db);
-				$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "ISO-8859-1");
+				$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "UTF-8");
 				
 				//tolgo gli spazi esterni dai singoli tags
 				function arr_trim(&$item1) {
