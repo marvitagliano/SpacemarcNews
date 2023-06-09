@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //calcolo il tempo di generazione della pagina (1a parte)
 $mtime1 = explode(" ", microtime());
@@ -354,29 +354,29 @@ while ($q_riga = mysqli_fetch_array($q_order)) {
     //seleziono il formato data
     
     switch ($rowconf['formato_data']) {
-        case 1:
-            $data = strftime("%a %d %b %Y, %H:%M", $q_riga['data_pubb']);
+		case 1:
+        	$data = date("D j F Y, H:i", $q_riga['data_pubb']);
         break;
         case 2:
-            $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['data_pubb']));
+			$data = date("l j F Y, H:i", $q_riga['data_pubb']);
         break;
         case 3:
-            $data = strftime("%d/%m/%Y, %H:%M", $q_riga['data_pubb']);
+             $data = date("d/m/Y, H:i", $q_riga['data_pubb']);
         break;
         case 4:
-            $data = strftime("%d %b %Y, %H:%M", $q_riga['data_pubb']);
+            $data = date("d M Y, H:i", $q_riga['data_pubb']);
         break;
         case 5:
-            $data = strftime("%d %B %Y, %H:%M", $q_riga['data_pubb']);
+            $data = date("d F Y, H:i", $q_riga['data_pubb']);
         break;
         case 6:
-            $data = strftime("%m/%d/%Y, %I:%M %p", $q_riga['data_pubb']);
+            $data = date("m/d/Y, H:i", $q_riga['data_pubb']);
         break;
         case 7:
-            $data = strftime("%B %d, %Y %I:%M %p", $q_riga['data_pubb']);
+             $data = date("F d, Y H:i", $q_riga['data_pubb']);
         break;
         case 8:
-            $data = strftime("%I:%M %p %B %d, %Y", $q_riga['data_pubb']);
+            $data = date("H:i F d, Y", $q_riga['data_pubb']);
         break;
     }
     
