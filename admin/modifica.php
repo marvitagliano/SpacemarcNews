@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //calcolo il tempo di generazione della pagina (1a parte)
 $mtime1 = explode(" ", microtime());
@@ -64,35 +64,35 @@ $commenti_checked = ($q_riga['abilita_commenti'] == 0) ? NULL : 'checked="checke
 $notifica_commenti_checked = ($q_riga['notifica_commenti'] == 0) ? NULL : 'checked="checked"';
 $link_autore = ($_SESSION['livello_id'] == 1) ? '<b>' . $lang['autore'] . '</b> ' . $autore_value . '' : NULL;
 $div_preview = NULL;
-$data_pubb_value = strftime("%d/%m/%Y %H:%M", $q_riga['data_pubb']);
+$data_pubb_value = date("d/m/Y H:i", $q_riga['data_pubb']);
 $approva_checked = ($q_riga['news_approvata'] == 1) ? 'checked="checked"' : NULL;
 
 //seleziono il formato data
 
 switch ($q_riga['FormatoData']) {
     case 1:
-        $data = strftime("%a %d %b %Y, %H:%M", $q_riga['data_pubb']);
+		$data = date("D j F Y, H:i", $q_riga['data_pubb']);
     break;
-    case 2:
-        $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['data_pubb']));
+	case 2:
+		$data = date("l j F Y, H:i", $q_riga['data_pubb']);
     break;
-    case 3:
-        $data = strftime("%d/%m/%Y, %H:%M", $q_riga['data_pubb']);
+	case 3:
+		$data = date("d/m/Y, H:i", $q_riga['data_pubb']);
+	break;
+	case 4:
+		$data = date("d M Y, H:i", $q_riga['data_pubb']);
     break;
-    case 4:
-        $data = strftime("%d %b %Y, %H:%M", $q_riga['data_pubb']);
+	case 5:
+		$data = date("d F Y, H:i", $q_riga['data_pubb']);
     break;
-    case 5:
-        $data = strftime("%d %B %Y, %H:%M", $q_riga['data_pubb']);
+	case 6:
+        $data = date("m/d/Y, H:i", $q_riga['data_pubb']);
     break;
-    case 6:
-        $data = strftime("%m/%d/%Y, %I:%M %p", $q_riga['data_pubb']);
+	case 7:
+        $data = date("F d, Y H:i", $q_riga['data_pubb']);
     break;
-    case 7:
-        $data = strftime("%B %d, %Y %I:%M %p", $q_riga['data_pubb']);
-    break;
-    case 8:
-        $data = strftime("%I:%M %p %B %d, %Y", $q_riga['data_pubb']);
+	case 8:
+        $data = date("H:i F d, Y", $q_riga['data_pubb']);
     break;
 }
 $upload_msg = NULL;
@@ -126,9 +126,9 @@ if (isset($_POST['preview'])) {
     }
 
     //ridefinisco la variabili per visualizzarne correttamente il contenuto nel form
-	$titolo_value = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "ISO-8859-1");
-    $testo_value = htmlspecialchars($_POST['testo'], ENT_QUOTES, "ISO-8859-1");
-    $tags_value = htmlspecialchars($_POST['tags'], ENT_QUOTES, "ISO-8859-1");
+	$titolo_value = htmlspecialchars($_POST['titolo'], ENT_QUOTES, "UTF-8");
+    $testo_value = htmlspecialchars($_POST['testo'], ENT_QUOTES, "UTF-8");
+    $tags_value = htmlspecialchars($_POST['tags'], ENT_QUOTES, "UTF-8");
 
 	$approva_checked = (isset($_POST['cb_approva'])) ? 'checked="checked"' : NULL;
     $insert_empty = NULL;
@@ -169,8 +169,8 @@ elseif (isset($_POST['submit'])) {
         //inizio controllo immagine di apertura
         immagine_apertura();
         $div_preview = NULL;
-        $titolo = htmlspecialchars($_POST['titolo'] , ENT_QUOTES, "ISO-8859-1");
-        $testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "ISO-8859-1");
+        $titolo = htmlspecialchars($_POST['titolo'] , ENT_QUOTES, "UTF-8");
+        $testo = htmlspecialchars($_POST['testo'], ENT_QUOTES, "UTF-8");
         $letture = (isset($_POST['letture'])) ? intval($_POST['letture']) : 0;
         $nosmile = (isset($_POST['nosmile'])) ? 1 : 0;
         $commenti = (isset($_POST['abilita_commenti'])) ? 1 : 0;
@@ -229,7 +229,10 @@ elseif (isset($_POST['submit'])) {
             $insert_empty = NULL;
 			$testo = mysqli_real_escape_string($db, $testo);
             $titolo = mysqli_real_escape_string($db, $titolo);
-            $immagine = mysqli_real_escape_string($db, $immagine);				
+
+			if ( !empty($_POST['immagine']) ) {
+				$immagine = mysqli_real_escape_string($db, $immagine);
+			}					
 
             //in base ai permessi dell'utente, imposto la query con i campi che può modificare o meno
             
@@ -307,7 +310,7 @@ elseif (isset($_POST['submit'])) {
 	//inserimento tags
 	if ( !empty($_POST['tags']) ) {
 
-		$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "ISO-8859-1");
+		$tags = htmlspecialchars($_POST['tags'], ENT_QUOTES, "UTF-8");
 				
 		//tolgo gli spazi esterni dai singoli tags
 		function arr_trim(&$item1) {
