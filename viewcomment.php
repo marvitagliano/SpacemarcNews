@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //se l'id è valido visualizzo il commento
 
@@ -97,28 +97,28 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
         
         switch ($rowconf['formato_data']) {
             case 1:
-                $data_comm = strftime("%a %d %b %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("D j F Y, H:i", $riga_comm['data_comm']);
             break;
             case 2:
-                $data_comm = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $riga_comm['data_comm']));
+                $data_comm = date("l j F Y, H:i", $riga_comm['data_comm']);
             break;
             case 3:
-                $data_comm = strftime("%d/%m/%Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d/m/Y, H:i", $riga_comm['data_comm']);
             break;
             case 4:
-                $data_comm = strftime("%d %b %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d M Y, H:i", $riga_comm['data_comm']);
             break;
             case 5:
-                $data_comm = strftime("%d %B %Y, %H:%M", $riga_comm['data_comm']);
+                $data_comm = date("d F Y, H:i", $riga_comm['data_comm']);
             break;
             case 6:
-                $data_comm = strftime("%m/%d/%Y, %I:%M %p", $riga_comm['data_comm']);
+                $data_comm = date("m/d/Y, H:i", $riga_comm['data_comm']);
             break;
             case 7:
-                $data_comm = strftime("%B %d, %Y %I:%M %p", $riga_comm['data_comm']);
+                $data_comm = date("F d, Y H:i", $riga_comm['data_comm']);
             break;
             case 8:
-                $data_comm = strftime("%I:%M %p %B %d, %Y", $riga_comm['data_comm']);
+                $data_comm = date("H:i F d, Y", $riga_comm['data_comm']);
             break;
         }
 
@@ -196,7 +196,7 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
 			$header.= "Return-Path: " . $_SERVER['SERVER_ADMIN'] . "\n";
 			$header.= "X-Mailer: PHP " . $phpversion . "\n";
 			$header.= "MIME-Version: 1.0\n";
-			$header.= "Content-type: text/plain; charset=ISO-8859-1\n";
+			$header.= "Content-type: text/plain; charset=UTF-8\n";
 			$header.= "Content-Transfer-encoding: 7bit\n";
 			@mail($rowconf['EmailAdmin'], "" . $rowconf['nome_sito'] . ": " . $lang['report_email_oggetto'] . " ID " . $riga_comm['id_comm'] . "", "" . $lang['report_email_testo'] . " (" .  $rbr_value . "):\n " . $rowconf['url_sito'] . "/" . $news_dir . "/viewcomment.php?id_comm=" . $riga_comm['id_comm'] . "\n Reported by: " . $_SERVER['REMOTE_ADDR'] .  "\n-- \n" . $rowconf['url_sito'] . "", $header);
 			
@@ -220,7 +220,7 @@ if ( $rowconf['disattivazione_commenti'] == 0 ) {
   <body>
 <?php
 		echo '<div id="commenti" class="text" style="width: 100%">';
-        echo '<a name="commento-' . $riga_comm['id_comm'] . '"></a><div id="testo_commento" class="text" align="left" style="background-color: ' . $colore . '; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 3px;">' . preg_replace('/([(http|https|ftp)]+:\/\/[\w-?&:;#!~=\.\/\@]+[\w\/])/i', '<a href="$1" target="_blank" rel="nofollow">$1</a>', nl2br($riga_comm['commento'])) . '<br /><br />
+        echo '<a name="commento-' . $riga_comm['id_comm'] . '"></a><div id="testo_commento" class="text" align="left" style="background-color: ' . $colore . '; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; padding: 3px;">' . preg_replace('/([(http|https|ftp)]+:\/\/[\w\-?&:;#!~=\.\/\@]+[\w\/])/i', '<a href="$1" target="_blank" rel="nofollow">$1</a>', nl2br($riga_comm['commento'])) . '<br /><br />
 			<hr style="color: #444444; border-style: dashed; border-width: 1px 0px 0px 0px; width: 99%; margin-bottom: 4px;" />
 			<span style="font-size: 10px;"> <img src="' . $img_path . '/commpub.png" border="0" alt="" /> ' . $link_autore . ' &nbsp; &#128338; ' . $data_comm . ' &nbsp; &#9888; <a href="javascript:void(0);" onclick="reportComment(\'report_' . $riga_comm['id_comm'] . '\');">' . $lang['report'] . '</a></span> ' . $comm_approvato . '</div><div id="report_' . $riga_comm['id_comm'] . '" class="report">';
 
