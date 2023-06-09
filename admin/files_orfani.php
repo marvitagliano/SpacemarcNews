@@ -76,34 +76,34 @@ if ($handle = opendir("../$file_dir")) {
 			foreach (glob("../$file_dir/$file/" . "*.{apk,ipa,bmp,gif,jpg,jpeg,png,psd,gpx,kml,kmz,gz,m4a,mp3,mp4,rar,zip,torrent,doc,docx,ods,odt,pdf,xml,xls,xlsx}", GLOB_BRACE) as $filename) {
                 $nome = basename($filename);
 				$dimensione = round(filesize($filename) / 1024, 1) > 1024 ? round(filesize($filename) / 1024 / 1024, 1) . ' MiB' : round(filesize($filename) / 1024, 1) . ' KiB';
-                $submit_disabled = (@count($nome) == 0) ? 'disabled="disabled"' : '';
+                $submit_disabled = (@count(array($nome)) == 0) ? 'disabled="disabled"' : '';
 
                 //seleziono il formato data
                 
                 switch ($row_formato_data['formato_data']) {
                     case 1:
-                        $data = strftime("%a %d %b %Y, %H:%M", filemtime($filename));
+                        $data = date("D j F Y, H:i", filemtime($filename));
                     break;
                     case 2:
-                        $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", filemtime($filename)));
+                        $data = date("l j F Y, H:i", filemtime($filename));
                     break;
                     case 3:
-                        $data = strftime("%d/%m/%Y, %H:%M", filemtime($filename));
+                        $data = date("d/m/Y, H:i", filemtime($filename));
                     break;
                     case 4:
-                        $data = strftime("%d %b %Y, %H:%M", filemtime($filename));
+                        $data = date("d M Y, H:i", filemtime($filename));
                     break;
                     case 5:
-                        $data = strftime("%d %B %Y, %H:%M", filemtime($filename));
+                        $data = date("d F Y, H:i", filemtime($filename));
                     break;
                     case 6:
-                        $data = strftime("%m/%d/%Y, %I:%M %p", filemtime($filename));
+                        $data = date("m/d/Y, H:i", filemtime($filename));
                     break;
                     case 7:
-                        $data = strftime("%B %d, %Y %I:%M %p", filemtime($filename));
+                        $data = date("F d, Y H:i", filemtime($filename));
                     break;
                     case 8:
-                        $data = strftime("%I:%M %p %B %d, %Y", filemtime($filename));
+                        $data = date("H:i F d, Y", filemtime($filename));
                     break;
                 }
 
@@ -220,7 +220,12 @@ if ($handle = opendir("../$file_dir")) {
                 //vedo in quante news sono presenti i files
                 $file_news = mysqli_query($db, "SELECT nt.id, COUNT(nt.id) AS TotNews FROM `$tab_news` nt JOIN `$tab_utenti` nu ON nu.user_id=nt.user_id WHERE nt.testo LIKE '%$nome%' OR nu.user_id=$file $sql_where GROUP BY nt.id");
                 $riga = mysqli_fetch_array($file_news);
-                $link_search = ($riga['TotNews'] == 0) ? 0 : '<a href="searchadmin.php?chiave=' . $nome . '&amp;rbw=in_news&amp;time=sempre&amp;autore=0&amp;categoria=0&amp;ordine=datadesc&amp;submit=Cerca" target="_blank" title="Search"><b>' . $riga['TotNews'] . '</b></a>';
+                
+				if (mysqli_num_rows($file_news) == 0) {
+					$link_search = 0;
+				} else {
+					 $link_search = '<a href="searchadmin.php?chiave=' . $nome . '&amp;rbw=in_news&amp;time=sempre&amp;autore=0&amp;categoria=0&amp;ordine=datadesc&amp;submit=Cerca" target="_blank" title="Search"><b>' . $riga['TotNews'] . '</b></a>';
+					}
 
                 //mostro i file
                 echo '<tr><td class="text2" align="center" bgcolor="#EEEEEE">' . $file . '</td>';
