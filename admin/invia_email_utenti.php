@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/../config.php');
@@ -39,8 +39,8 @@ $messaggio_value = NULL;
 
 if (isset($_POST['submit'])) {
 	
-	$oggetto_value = (isset($_POST['oggetto'])) ? htmlspecialchars($_POST['oggetto'], ENT_QUOTES, "ISO-8859-1") : NULL;
-	$messaggio_value = (isset($_POST['messaggio'])) ? htmlspecialchars($_POST['messaggio'], ENT_QUOTES, "ISO-8859-1") : NULL;
+	$oggetto_value = (isset($_POST['oggetto'])) ? htmlspecialchars($_POST['oggetto'], ENT_QUOTES, "UTF-8") : NULL;
+	$messaggio_value = (isset($_POST['messaggio'])) ? htmlspecialchars($_POST['messaggio'], ENT_QUOTES, "UTF-8") : NULL;
 
     //controllo campi
     
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
             $mail_admin = "," . $row['email'];
         }
         else {
-            $mail_admin = NULL;
+            $mail_admin = '';
         }
         $phpversion = (!@phpversion()) ? 'N/A' : phpversion();
         $to = $mail_admin;
@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
         $header.= "Return-Path: $mail_admin\n";
         $header.= "X-Mailer: PHP " . $phpversion . "\n";
         $header.= "MIME-Version: 1.0\n";
-        $header.= "Content-type: text/plain; charset=ISO-8859-1\n";
+        $header.= "Content-type: text/plain; charset=UTF-8\n";
         $header.= "Content-Transfer-encoding: 7bit\n";
         
         if (mail($to, $oggetto, $messaggio, $header)) {
@@ -98,7 +98,7 @@ echo $mail_msg; ?><br />
       <span class="text"><b>          
           <?php echo $lang['email_utenti_descr']; ?></b>      
       </span><br />             
-      <form method="post" name="sendmail" action="invia_email_utenti.php?user_id=<?php echo htmlspecialchars($get_user_id, ENT_QUOTES, "ISO-8859-1"); ?>">                 
+      <form method="post" name="sendmail" action="invia_email_utenti.php?user_id=<?php echo htmlspecialchars($get_user_id, ENT_QUOTES, "UTF-8"); ?>">                 
         <table width="100%" border="0" align="center" cellpadding="1" cellspacing="1">                     
           <tr>                            
             <td align="right" class="text" width="23%" bgcolor="#EEEEEE"><?php echo $lang['oggetto']; ?></td>                         
