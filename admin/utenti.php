@@ -471,29 +471,29 @@ while ($q_riga = mysqli_fetch_array($q_utenti)) {
     //seleziono il formato data
     
     switch ($rowconf['formato_data']) {
-        case 1:
-            $data = strftime("%a %d %b %Y, %H:%M", $q_riga['data_registrazione']);
-        break;
+		case 1:
+        	$data = date("D j F Y, H:i", $q_riga['data_registrazione']);
+		break;
         case 2:
-            $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['data_registrazione']));
+			$data = date("l j F Y, H:i", $q_riga['data_registrazione']);
         break;
         case 3:
-            $data = strftime("%d/%m/%Y, %H:%M", $q_riga['data_registrazione']);
+             $data = date("d/m/Y, H:i", $q_riga['data_registrazione']);
         break;
         case 4:
-            $data = strftime("%d %b %Y, %H:%M", $q_riga['data_registrazione']);
+            $data = date("d M Y, H:i", $q_riga['data_registrazione']);
         break;
         case 5:
-            $data = strftime("%d %B %Y, %H:%M", $q_riga['data_registrazione']);
+            $data = date("d F Y, H:i", $q_riga['data_registrazione']);
         break;
         case 6:
-            $data = strftime("%m/%d/%Y, %I:%M %p", $q_riga['data_registrazione']);
+            $data = date("m/d/Y, H:i", $q_riga['data_registrazione']);
         break;
         case 7:
-            $data = strftime("%B %d, %Y %I:%M %p", $q_riga['data_registrazione']);
+             $data = date("F d, Y H:i", $q_riga['data_registrazione']);
         break;
         case 8:
-            $data = strftime("%I:%M %p %B %d, %Y", $q_riga['data_registrazione']);
+            $data = date("H:i F d, Y", $q_riga['data_registrazione']);
         break;
     }
     $nome_livello = ($q_riga['livello_id'] == 1) ? '<br />(' . $q_riga['nome_livello'] . ')' : NULL;
