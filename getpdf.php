@@ -11,7 +11,7 @@
  *  of the License, or (at your option) any later version.
  *****************************************************************/
  
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/config.php');
@@ -25,9 +25,9 @@ $sql_news = @mysqli_query($db, "SELECT nt.id, nt.titolo, nt.testo, nt.data_pubb,
 $rownews = @mysqli_fetch_array($sql_news);
 
 if (@mysqli_num_rows($sql_news) > 0) {
-    $titolo = html_entity_decode($rownews['titolo'], ENT_QUOTES, 'ISO-8859-1');
-    $testo = nl2br(html_entity_decode($rownews['testo'], ENT_QUOTES, 'ISO-8859-1'));
-    $autore = html_entity_decode($rownews['nome_cognome'], ENT_QUOTES, 'ISO-8859-1');
+    $titolo = html_entity_decode($rownews['titolo'], ENT_QUOTES, 'UTF-8');
+    $testo = nl2br(html_entity_decode($rownews['testo'], ENT_QUOTES, 'UTF-8'));
+    $autore = html_entity_decode($rownews['nome_cognome'], ENT_QUOTES, 'UTF-8');
 
     //estraggo alcune impostazioni
     $sql_conf = @mysqli_query($db, "SELECT url_sito, formato_data FROM `$tab_config`");
@@ -38,28 +38,28 @@ if (@mysqli_num_rows($sql_news) > 0) {
     
     switch ($rowconf['formato_data']) {
         case 1:
-            $data = strftime("%a %d %b %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("D j F Y, H:i", $rownews['data_pubb']);
         break;
         case 2:
-            $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $rownews['data_pubb']));
+            $data = date("l j F Y, H:i", $rownews['data_pubb']);
         break;
         case 3:
-            $data = strftime("%d/%m/%Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d/m/Y, H:i", $rownews['data_pubb']);
         break;
         case 4:
-            $data = strftime("%d %b %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d M Y, H:i", $rownews['data_pubb']);
         break;
         case 5:
-            $data = strftime("%d %B %Y, %H:%M", $rownews['data_pubb']);
+            $data = date("d F Y, H:i", $rownews['data_pubb']);
         break;
         case 6:
-            $data = strftime("%m/%d/%Y, %I:%M %p", $rownews['data_pubb']);
+            $data = date("m/d/Y, H:i", $rownews['data_pubb']);
         break;
         case 7:
-            $data = strftime("%B %d, %Y %I:%M %p", $rownews['data_pubb']);
+            $data = date("F d, Y H:i", $rownews['data_pubb']);
         break;
         case 8:
-            $data = strftime("%I:%M %p %B %d, %Y", $rownews['data_pubb']);
+            $data = date("H:i F d, Y", $rownews['data_pubb']);
         break;
     }
 
