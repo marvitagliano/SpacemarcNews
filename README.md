@@ -1,4 +1,4 @@
-# SpacemarcNews 1.2.5
+# SpacemarcNews 1.2.6
 
 Applicazione per pubblicare e gestire le news di un sito web. 
 
