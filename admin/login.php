@@ -46,10 +46,13 @@ if ($cookie) {
 $sql_ip = @mysqli_query($db, "SELECT login_errati, dataora FROM `$tab_ban` WHERE ban_ip ='" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati >= 5 AND white_list = 0");
 $riga_ip = @mysqli_fetch_assoc($sql_ip);
 
-if ( time() - 300 <= $riga_ip['dataora'] ) { //300 secondi = 5 minuti
-	die ( $lang['ip_bloccato'] );
-} else {
-	@mysqli_query($db, "DELETE FROM `$tab_ban` WHERE ban_ip = '" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati >= 5 AND white_list = 0 LIMIT 1");
+if ( mysqli_num_rows($sql_ip) > 0 ) {
+	
+	if ( time() - 300 <= $riga_ip['dataora'] ) { //300 secondi = 5 minuti
+		die ( $lang['ip_bloccato'] );
+	} else {
+		@mysqli_query($db, "DELETE FROM `$tab_ban` WHERE ban_ip = '" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati >= 5 AND white_list = 0 LIMIT 1");
+	}
 }
 	
 $errore_login = NULL;
@@ -122,17 +125,18 @@ if ( isset($_POST['submit']) ) {
 			$errore_login = '<div id="error">' . $lang['invalid_user_pass'] . '</div>';
 			
 			mysqli_query($db, "INSERT INTO `$tab_ban` (ban_ip, dataora, login_errati, white_list) VALUES ('" . $_SERVER['REMOTE_ADDR'] . "', " . time() . ", 1, 0)");
-		
-		// se l'IP è presente in tabella ma non è in white list incremento il numero di tentativi errati
-		} elseif ( mysqli_num_rows($sql_banip) > 0 && $row_banip['white_list'] == 0) {
+
+		// se l'IP è presente in tabella incremento il numero di tentativi errati
+		} elseif ( mysqli_num_rows($sql_banip) > 0 ) {
 
 			 mysqli_query($db, "UPDATE `$tab_ban` SET dataora = " . time() . ", login_errati=login_errati+1 WHERE ban_ip = '" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati >= 0 AND white_list = 0 LIMIT 1");
 			
-			$sql_login = mysqli_query($db, "SELECT login_errati FROM `$tab_ban` WHERE ban_ip = '" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati > 0 AND white_list = 0");
+			$sql_login = mysqli_query($db, "SELECT login_errati, white_list FROM `$tab_ban` WHERE ban_ip = '" . $_SERVER['REMOTE_ADDR'] . "' AND login_errati > 0");
 			$row_login = mysqli_fetch_assoc($sql_login);  
 			  
 			 //se i login errati sono 4 mostro l'avviso di ultimo tentativo
-			if ( $row_login['login_errati'] == 4 ) {
+			 
+			if ( $row_login['login_errati'] == 4 && $row_login['white_list'] == 0 ) {
 				$ultimo_tentativo = '<div id="error">' . $lang['ultimo_tentativo'] . '</div>';
 			}
 		
