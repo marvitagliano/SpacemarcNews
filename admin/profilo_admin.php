@@ -12,7 +12,7 @@
  *****************************************************************/
  
 session_start();
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //calcolo il tempo di generazione della pagina (1a parte)
 $mtime1 = explode(" ", microtime());
@@ -83,44 +83,44 @@ if (mysqli_num_rows($q_profilo) == 0) {
 
 switch ($q_riga['FormatoData']) {
     case 1:
-        $data_registrazione = strftime("%a %d %b %Y, %H:%M", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%a %d %b %Y, %H:%M", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%a %d %b %Y, %H:%M", $q_riga['data_pubb']);
+        $data_registrazione = date("D j F Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("D j F Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("D j F Y, H:i", $q_riga['data_pubb']);
     break;
     case 2:
-        $data_registrazione = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['data_registrazione']));
-        $ultimo_accesso = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['ultimo_accesso']));
-        $ultima_inserita = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $q_riga['data_pubb']));
+        $data_registrazione = date("l j F Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("l j F Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("l j F Y, H:i", $q_riga['data_pubb']);
     break;
     case 3:
-        $data_registrazione = strftime("%d/%m/%Y, %H:%M", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%d/%m/%Y, %H:%M", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%d/%m/%Y, %H:%M", $q_riga['data_pubb']);
+        $data_registrazione = date("d/m/Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("d/m/Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("d/m/Y, H:i", $q_riga['data_pubb']);
     break;
     case 4:
-        $data_registrazione = strftime("%d %b %Y, %H:%M", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%d %b %Y, %H:%M", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%d %b %Y, %H:%M", $q_riga['data_pubb']);
+        $data_registrazione = date("d M Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("d M Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("d M Y, H:i", $q_riga['data_pubb']);
     break;
     case 5:
-        $data_registrazione = strftime("%d %B %Y, %H:%M", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%d %B %Y, %H:%M", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%d %B %Y, %H:%M", $q_riga['data_pubb']);
+        $data_registrazione = date("d F Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("d F Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("d F Y, H:i", $q_riga['data_pubb']);
     break;
     case 6:
-        $data_registrazione = strftime("%m/%d/%Y, %I:%M %p", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%m/%d/%Y, %I:%M %p", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%m/%d/%Y, %I:%M %p", $q_riga['data_pubb']);
+        $data_registrazione = date("m/d/Y, H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("m/d/Y, H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("m/d/Y, H:i", $q_riga['data_pubb']);
     break;
     case 7:
-        $data_registrazione = strftime("%B %d, %Y %I:%M %p", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%B %d, %Y %I:%M %p", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%B %d, %Y %I:%M %p", $q_riga['data_pubb']);
+        $data_registrazione = date("F d, Y H:i", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("F d, Y H:i", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("F d, Y H:i", $q_riga['data_pubb']);
     break;
     case 8:
-        $data_registrazione = strftime("%I:%M %p %B %d, %Y", $q_riga['data_registrazione']);
-        $ultimo_accesso = strftime("%I:%M %p %B %d, %Y", $q_riga['ultimo_accesso']);
-        $ultima_inserita = strftime("%I:%M %p %B %d, %Y", $q_riga['data_pubb']);
+        $data_registrazione = date("H:i F d, Y", $q_riga['data_registrazione']);
+        $ultimo_accesso = date("H:i F d, Y", $q_riga['ultimo_accesso']);
+        $ultima_inserita = date("H:i F d, Y", $q_riga['data_pubb']);
     break;
 }
 
@@ -353,13 +353,13 @@ if (isset($_POST['submit'])) {
 
     //servono come valori dei campi di testo, non per l'UPDATE
     
-	$nome_cognome_value = htmlspecialchars($_POST['nome_cognome'], ENT_QUOTES, "ISO-8859-1");
-	$email_value = htmlspecialchars($_POST['email'], ENT_QUOTES, "ISO-8859-1");
-	$sito_value = htmlspecialchars($_POST['sito'], ENT_QUOTES, "ISO-8859-1");
-	$im_num_value = htmlspecialchars($_POST['im_num'], ENT_QUOTES, "ISO-8859-1");
-    $occupazione_value = htmlspecialchars($_POST['occupazione'], ENT_QUOTES, "ISO-8859-1");
-    $citta_value = htmlspecialchars($_POST['citta'], ENT_QUOTES, "ISO-8859-1");
-    $hobby_value = htmlspecialchars($_POST['hobby'], ENT_QUOTES, "ISO-8859-1");
+	$nome_cognome_value = htmlspecialchars($_POST['nome_cognome'], ENT_QUOTES, "UTF-8");
+	$email_value = htmlspecialchars($_POST['email'], ENT_QUOTES, "UTF-8");
+	$sito_value = htmlspecialchars($_POST['sito'], ENT_QUOTES, "UTF-8");
+	$im_num_value = htmlspecialchars($_POST['im_num'], ENT_QUOTES, "UTF-8");
+    $occupazione_value = htmlspecialchars($_POST['occupazione'], ENT_QUOTES, "UTF-8");
+    $citta_value = htmlspecialchars($_POST['citta'], ENT_QUOTES, "UTF-8");
+    $hobby_value = htmlspecialchars($_POST['hobby'], ENT_QUOTES, "UTF-8");
 
     //invio il cookie se scelgo di accedere automaticamente al sistema
     
@@ -398,10 +398,10 @@ if (isset($_POST['submit'])) {
 			$row_email = mysqli_fetch_assoc($sql_email);    
 			
 			if ($row_email['TotEmail'] > 0 ) {
-                mysqli_query($db, "UPDATE `$tab_commenti` SET autore='$nome_cognome', email_autore='$email', sito_autore='" . htmlspecialchars($sito, ENT_QUOTES, "ISO-8859-1") . "' WHERE email_autore='" . $q_riga['email'] . "'");
+                mysqli_query($db, "UPDATE `$tab_commenti` SET autore='$nome_cognome', email_autore='$email', sito_autore='" . htmlspecialchars($sito, ENT_QUOTES, "UTF-8") . "' WHERE email_autore='" . $q_riga['email'] . "'");
             }
             
-            if (mysqli_query($db, "UPDATE `$tab_utenti` SET permessi='$rb_permessi_utente', mostra_link='$rb_mostra_link', email_nascosta=$user_email_nascosta_val, nome_cognome='" . htmlspecialchars($nome_cognome, ENT_QUOTES, "ISO-8859-1") . "', user_password='$user_password_new', email='$email', sito='" . htmlspecialchars($sito, ENT_QUOTES, "ISO-8859-1") . "', im='" . $_POST['im'] . "', im_num='" . htmlspecialchars($im_num, ENT_QUOTES, "ISO-8859-1") . "', facebook='" . htmlspecialchars($facebook2, ENT_QUOTES, "ISO-8859-1") . "', twitter='" . htmlspecialchars($twitter2, ENT_QUOTES, "ISO-8859-1") . "', instagram='" . htmlspecialchars($instagram2, ENT_QUOTES, "ISO-8859-1") . "', data_nascita='$user_data_nascita2', citta='" . htmlspecialchars($citta, ENT_QUOTES, "ISO-8859-1") . "', occupazione='" . htmlspecialchars($occupazione, ENT_QUOTES, "ISO-8859-1") . "', hobby='" . htmlspecialchars($hobby, ENT_QUOTES, "ISO-8859-1") . "', autorizza_news=$user_autorizza_news_val WHERE user_id=" . intval($q_user_id))) {
+            if (mysqli_query($db, "UPDATE `$tab_utenti` SET permessi='$rb_permessi_utente', mostra_link='$rb_mostra_link', email_nascosta=$user_email_nascosta_val, nome_cognome='" . htmlspecialchars($nome_cognome, ENT_QUOTES, "UTF-8") . "', user_password='$user_password_new', email='$email', sito='" . htmlspecialchars($sito, ENT_QUOTES, "UTF-8") . "', im='" . $_POST['im'] . "', im_num='" . htmlspecialchars($im_num, ENT_QUOTES, "UTF-8") . "', facebook='" . htmlspecialchars($facebook, ENT_QUOTES, "UTF-8") . "', twitter='" . htmlspecialchars($twitter, ENT_QUOTES, "UTF-8") . "', instagram='" . htmlspecialchars($instagram, ENT_QUOTES, "UTF-8") . "',data_nascita='$user_data_nascita2', citta='" . htmlspecialchars($citta, ENT_QUOTES, "UTF-8") . "', occupazione='" . htmlspecialchars($occupazione, ENT_QUOTES, "UTF-8") . "', hobby='" . htmlspecialchars($hobby, ENT_QUOTES, "UTF-8") . "', autorizza_news=$user_autorizza_news_val WHERE user_id=" . intval($q_user_id))) {
 
                 $update_msg = '<div id="success">' . $lang['edit_prof_ok'] . ' <img src="' . $img_path . '/attendi.gif" title="" alt="" /></div><br />';
                 
@@ -486,7 +486,7 @@ echo operazioni_utente();
               <?php echo $lang['emaildescr']; ?>            
             </span></td>                                       
           <td bgcolor="#EEEEEE" align="left" class="text">                                      
-            <input type="text" name="email" value="<?php echo htmlspecialchars($email_value, ENT_QUOTES, "ISO-8859-1"); ?>" size="32" maxlength="50" /> 
+            <input type="text" name="email" value="<?php echo htmlspecialchars($email_value, ENT_QUOTES, "UTF-8"); ?>" size="32" maxlength="50" /> 
             <?php echo $email_nascosta; ?>                                           
             <?php echo $link_invia_email; ?>                                         
             <?php echo $email_errata; ?>                                           
@@ -552,11 +552,11 @@ echo $user_password2_short; ?></td>
             <b class="text">Social Network</b></td>                                       
            <td bgcolor="#EEEEEE" align="left" class="text">
 			<span style="cursor: help; border-bottom: 1px dotted #000;" title=".a-zA-Z0-9 5,50">Facebook</span> 
-            <input type="text" name="facebook" value="<?php echo htmlspecialchars($facebook, ENT_QUOTES, "ISO-8859-1"); ?>" size="20" maxlength="50" /> 
+            <input type="text" name="facebook" value="<?php echo htmlspecialchars($facebook, ENT_QUOTES, "UTF-8"); ?>" size="20" maxlength="50" /> 
             <span style="cursor: help; border-bottom: 1px dotted #000;" title="a-zA-Z0-9_ 1,15">Twitter</span> 
-            <input type="text" name="twitter" value="<?php echo htmlspecialchars($twitter, ENT_QUOTES, "ISO-8859-1"); ?>" size="20" maxlength="15" /> 
+            <input type="text" name="twitter" value="<?php echo htmlspecialchars($twitter, ENT_QUOTES, "UTF-8"); ?>" size="20" maxlength="15" /> 
             <span style="cursor: help; border-bottom: 1px dotted #000;" title="a-zA-Z0-9._ 1,30">Instagram</span>
-            <input type="text" name="instagram" value="<?php echo htmlspecialchars($instagram, ENT_QUOTES, "ISO-8859-1"); ?>" size="20" maxlength="30" /> 
+            <input type="text" name="instagram" value="<?php echo htmlspecialchars($instagram, ENT_QUOTES, "UTF-8"); ?>" size="20" maxlength="30" /> 
             <?php echo $facebook_errato; echo $twitter_errato; echo $instagram_errato; ?></td>                     
         </tr>              
         <tr>                                       
@@ -566,7 +566,7 @@ echo $user_password2_short; ?></td>
               <?php echo $lang['nascitadescr']; ?>            
             </span></td>                                       
           <td bgcolor="#EEEEEE" align="left">                                      
-            <input type="text" name="data_nascita" value="<?php echo htmlspecialchars($data_nascita, ENT_QUOTES, "ISO-8859-1"); ?>" size="11" maxlength="10" />                                        
+            <input type="text" name="data_nascita" value="<?php echo htmlspecialchars($data_nascita, ENT_QUOTES, "UTF-8"); ?>" size="11" maxlength="10" />                                        
             <?php echo $data_nascita_errata; ?></td>                              
         </tr>                                  
         <tr>                                       
