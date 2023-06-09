@@ -394,14 +394,14 @@ echo $insert_msg_ok;
           <td bgcolor="#EEEEEE" align="left" class="text">
             <select name="formato_data">
 <?php
-echo '<option value="1" ' . $fd_selected1 . '>' . strftime("%a %d %b %Y, %H:%M") . '</option>';
-echo '<option value="2" ' . $fd_selected2 . '>' . str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M")) . '</option>';
-echo '<option value="3" ' . $fd_selected3 . '>' . strftime("%d/%m/%Y, %H:%M") . '</option>';
-echo '<option value="4" ' . $fd_selected4 . '>' . strftime("%d %b %Y, %H:%M") . '</option>';
-echo '<option value="5" ' . $fd_selected5 . '>' . strftime("%d %B %Y, %H:%M") . '</option>';
-echo '<option value="6" ' . $fd_selected6 . '>' . strftime("%m/%d/%Y, %I:%M") . '</option>';
-echo '<option value="7" ' . $fd_selected7 . '>' . strftime("%B %d, %Y %I:%M") . '</option>';
-echo '<option value="8" ' . $fd_selected8 . '>' . strftime("%I:%M %B %d, %Y") . '</option>';
+echo '<option value="1" ' . $fd_selected1 . '>' . date("D j F Y, H:i") . '</option>';
+echo '<option value="2" ' . $fd_selected2 . '>' . date("l j F Y, H:i") . '</option>';
+echo '<option value="3" ' . $fd_selected3 . '>' . date("d/m/Y, H:i") . '</option>';
+echo '<option value="4" ' . $fd_selected4 . '>' . date("d M Y, H:i") . '</option>';
+echo '<option value="5" ' . $fd_selected5 . '>' . date("d F Y, H:i") . '</option>';
+echo '<option value="6" ' . $fd_selected6 . '>' . date("m/d/Y, H:i") . '</option>';
+echo '<option value="7" ' . $fd_selected7 . '>' . date("F d, Y H:i") . '</option>';
+echo '<option value="8" ' . $fd_selected8 . '>' . date("H:i F d, Y") . '</option>';
 ?>                         
             </select></td>                     
         </tr>                     
@@ -507,7 +507,7 @@ echo ' &nbsp; &nbsp; ' . $lang['dimensione_totale'] . ': <b>' . $row_total_size[
 echo '<img src="' . $img_path . '/sel_all.gif" alt="select" /> ' . $lang['backup_compresso'] . ' <input type="radio" id="save" name="bck" value="save" /><label for="save">' . $lang['backup_save'] . ' &quot;' . $file_dir . '&quot;</label> <input type="radio" id="download" name="bck" value="download" checked="checked" /><label for="download">' . $lang['backup_download'] . '</label> <input type="submit" name="backup" value="Backup" style="font-weight: bold;" /> ';
  
 if( file_exists('../' . $file_dir . '/' . $bck_name . '.sql.gz')) { 
-	echo '<br /><br /><img src="' . $img_path . '/icon_rar.gif" alt="ASC" /> <a href="../' . $file_dir . '/' . $bck_name . '.sql.gz' . '">' . $bck_name . '.sql.gz' . '</a> (' . strftime('%d/%m/%Y, %H:%M', filemtime('../' . $file_dir . '/' . $bck_name . '.sql.gz')) . ' - KiB ' . round(filesize('../' . $file_dir . '/' . $bck_name . '.sql.gz') / 1024, 1) . ') <a href="impostazioni.php?action=bck_canc" onclick="return confirmSubmit();">' . $lang['backup_file_canc'] . '</a><br />';
+	echo '<br /><br /><img src="' . $img_path . '/icon_rar.gif" alt="ASC" /> <a href="../' . $file_dir . '/' . $bck_name . '.sql.gz' . '">' . $bck_name . '.sql.gz' . '</a> (' . date('D j F Y, H:i', filemtime('../' . $file_dir . '/' . $bck_name . '.sql.gz')) . ' - KiB ' . round(filesize('../' . $file_dir . '/' . $bck_name . '.sql.gz') / 1024, 1) . ') <a href="impostazioni.php?action=bck_canc" onclick="return confirmSubmit();">' . $lang['backup_file_canc'] . '</a><br />';
 }
 
 echo '<br />';
