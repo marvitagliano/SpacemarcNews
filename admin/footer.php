@@ -36,6 +36,6 @@ $mtime2 = @explode(" ", microtime());
 $endtime = $mtime2[1] + $mtime2[0];
 $totaltime = ($endtime - $starttime);
 $totaltime = @number_format($totaltime, 3);
-echo ' - ' . $lang['time_gen'] . ' ' . $totaltime . ' sec. - ' . strftime("%a %d %b %Y %H:%M");
+echo ' - ' . $lang['time_gen'] . ' ' . $totaltime . ' sec. - ' . date_format(date_create('now'), "d M Y H:i");
 ?> 
 </div>
