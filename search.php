@@ -11,7 +11,7 @@
  *  of the License, or (at your option) any later version.
  *****************************************************************/
  
-header('Content-type: text/html; charset=ISO-8859-1');
+header('Content-type: text/html; charset=UTF-8');
 
 //includo i file di configurazione
 require_once (dirname(__FILE__) . '/config.php');
@@ -146,7 +146,7 @@ else {
     $get_categoria = "0";
 }
 
-    $val_chiave = (isset($_GET['chiave'])) ? htmlspecialchars($_GET['chiave'], ENT_QUOTES, "ISO-8859-1") : NULL;
+    $val_chiave = (isset($_GET['chiave'])) ? htmlspecialchars($_GET['chiave'], ENT_QUOTES, "UTF-8") : NULL;
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -240,7 +240,7 @@ if ($doquery == 1) {
 	$num_totale = $num_totale_riga['NumTotale'];
 
     //se la ricerca non produce risultati stampo l'avviso
-    $trovata = ($num_totale == 0) ? '<br /><div id="error2">' . $lang['no_results'] . ' <br /><a href="https://www.google.com/search?q=' . $val_chiave . '&amp;sitesearch=' . $rowconf['url_sito'] . '/' . $news_dir . '" title="Google" class="piccolo">' . $lang['no_results_google'] . '</a></div>' : '<br /><span class="text"><b>' . $num_totale . '</b> ' . $lang['risultati'] . ' <b>' . stripslashes(htmlspecialchars($chiave, ENT_QUOTES, "ISO-8859-1")) . '</b></span><br />';
+    $trovata = ($num_totale == 0) ? '<br /><div id="error2">' . $lang['no_results'] . ' <br /><a href="https://www.google.com/search?q=' . $val_chiave . '&amp;sitesearch=' . $rowconf['url_sito'] . '/' . $news_dir . '" title="Google" class="piccolo">' . $lang['no_results_google'] . '</a></div>' : '<br /><span class="text"><b>' . $num_totale . '</b> ' . $lang['risultati'] . ' <b>' . stripslashes(htmlspecialchars($chiave, ENT_QUOTES, "UTF-8")) . '</b></span><br />';
     echo $trovata;
     
     while ($row = mysqli_fetch_array($result)) {
@@ -248,30 +248,30 @@ if ($doquery == 1) {
         //seleziono il formato data
         
         switch ($rowconf['formato_data']) {
-            case 1:
-                $data = strftime("%a %d %b %Y, %H:%M", $row['data_pubb']);
-            break;
-            case 2:
-                $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $row['data_pubb']));
-            break;
-            case 3:
-                $data = strftime("%d/%m/%Y, %H:%M", $row['data_pubb']);
-            break;
-            case 4:
-                $data = strftime("%d %b %Y, %H:%M", $row['data_pubb']);
-            break;
-            case 5:
-                $data = strftime("%d %B %Y, %H:%M", $row['data_pubb']);
-            break;
-            case 6:
-                $data = strftime("%m/%d/%Y, %I:%M %p", $row['data_pubb']);
-            break;
-            case 7:
-                $data = strftime("%B %d, %Y %I:%M %p", $row['data_pubb']);
-            break;
-            case 8:
-                $data = strftime("%I:%M %p %B %d, %Y", $row['data_pubb']);
-            break;
+			case 1:
+				$data = date("D j F Y, H:i", $row['data_pubb']);
+			break;
+			case 2:
+				$data = date("l j F Y, H:i", $row['data_pubb']);
+			break;
+			case 3:
+				$data = date("d/m/Y, H:i", $row['data_pubb']);
+			break;
+			case 4:
+				$data = date("d M Y, H:i", $row['data_pubb']);
+			break;
+			case 5:
+				$data = date("d F Y, H:i", $row['data_pubb']);
+			break;
+			case 6:
+				$data = date("m/d/Y, H:i", $row['data_pubb']);
+			break;
+			case 7:
+				$data = date("F d, Y H:i", $row['data_pubb']);
+			break;
+			case 8:
+				$data = date("H:i F d, Y", $row['data_pubb']);
+			break;
         }
 
         //stampo i risultati della ricerca
@@ -297,7 +297,7 @@ if ($num_totale > $rec_page) {
     //paginazione
     $numero_pagine = ceil($num_totale / $rec_page);
     $pagina_attuale = ceil(($start / $rec_page) + 1);
-    echo page_bar("search.php?chiave=" . stripslashes(htmlspecialchars($chiave, ENT_QUOTES, "ISO-8859-1")) . "&amp;categoria=$get_categoria&amp;time=$time&amp;ordine=$ordine&amp;autore=$get_autore", $pagina_attuale, $numero_pagine, $rec_page);
+    echo page_bar("search.php?chiave=" . stripslashes(htmlspecialchars($chiave, ENT_QUOTES, "UTF-8")) . "&amp;categoria=$get_categoria&amp;time=$time&amp;ordine=$ordine&amp;autore=$get_autore", $pagina_attuale, $numero_pagine, $rec_page);
     echo '</div>';
 }
 ?>              
