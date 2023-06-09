@@ -627,7 +627,7 @@ if ($doquery == 1) {
                     $data = date("m/d/Y, H:i", $row['data_comm']);
                 break;
                 case 7:
-                    $data = $data = date("F d, Y H:i", $row['data_comm']);
+                    $data = date("F d, Y H:i", $row['data_comm']);
                 break;
                 case 8:
                     $data = date("H:i F d, Y", $row['data_comm']);
