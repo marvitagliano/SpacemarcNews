@@ -156,37 +156,37 @@ check_form();
     echo '<td class="text" align="center">' . $link_file . '</td>';
     echo '<td class="text" align="center">' . $link_size . '</td>';
     echo '<td class="text" align="center">' . $link_data . '</td></tr>';
-    $submit_disabled = (@count($fa[0]) == 0) ? 'disabled="disabled"' : '';
+    $submit_disabled = (@count(array($fa[0])) == 0) ? 'disabled="disabled"' : '';
     
     foreach ($file_array as $fa) {
         ++$id_file;
 
         //seleziono il formato data
-        
+
         switch ($rigaid['formato_data']) {
             case 1:
-                $data = strftime("%a %d %b %Y, %H:%M", $fa[2]);
+				$data = date("D j F Y, H:i", $fa[2]);
             break;
             case 2:
-                $data = str_replace("ì", "&igrave;", strftime("%A %d %B %Y, %H:%M", $fa[2]));
+                $data = date("l j F Y, H:i", $fa[2]);
             break;
             case 3:
-                $data = strftime("%d/%m/%Y, %H:%M", $fa[2]);
+                $data = date("d/m/Y, H:i", $fa[2]);
             break;
             case 4:
-                $data = strftime("%d %b %Y, %H:%M", $fa[2]);
+                $data = date("d M Y, H:i", $fa[2]);
             break;
             case 5:
-                $data = strftime("%d %B %Y, %H:%M", $fa[2]);
+                $data = date("d F Y, H:i", $fa[2]);
             break;
             case 6:
-                $data = strftime("%m/%d/%Y, %I:%M %p", $fa[2]);
+                $data = date("m/d/Y, H:i", $fa[2]);
             break;
             case 7:
-                $data = strftime("%B %d, %Y %I:%M %p", $fa[2]);
+                $data = date("F d, Y H:i", $fa[2]);
             break;
             case 8:
-                $data = strftime("%I:%M %p %B %d, %Y", $fa[2]);
+                $data = date("H:i F d, Y", $fa[2]);
             break;
         }
 
